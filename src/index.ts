@@ -83,7 +83,7 @@ export function useMiniRouter() {
       return
     }
     to = name
-    from = routerView!.getCurrentComponentName()
+    from = routerView!.dialog.component.name
     isEntry && routerRecords.push(from)
     isEntry = false
     callback = callbackOfReturnThisPage
