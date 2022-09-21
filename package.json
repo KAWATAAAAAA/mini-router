@@ -1,6 +1,6 @@
 {
-  "name": "mini-router",
-  "version": "0.1.4",
+  "name": "@xsyx/mini-router",
+  "version": "0.1.5",
   "description": "Used with dialog-view, you can dynamically render components in the dialog instead of nested pop ups",
   "main": "lib/bundle.js",
   "module": "esm/bundle.js",

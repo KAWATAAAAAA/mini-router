@@ -11,7 +11,8 @@ interface ComponentMapItem {
   component: VueComponent
 }
 interface ComponentMeta {
-  name: string
+  name: string,
+  title?: string,
   isCache?: true
   params?: any
   callbackOfReturnThisPage?: CallBack
@@ -92,7 +93,7 @@ export function useMiniRouter() {
     /* 渲染目标组件 */
     routerView.update({
       component: componentMap[name].component,
-      title: componentMap[name].title,
+      title: options.title || componentMap[name].title,
       isCache,
       params,
       name

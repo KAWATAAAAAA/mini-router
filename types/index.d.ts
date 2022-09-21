@@ -6,6 +6,7 @@ interface ComponentMapItem {
 }
 interface ComponentMeta {
     name: string;
+    title?: string;
     isCache?: true;
     params?: any;
     callbackOfReturnThisPage?: CallBack;
