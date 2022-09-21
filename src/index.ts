@@ -21,6 +21,9 @@ interface IComponentMaps {
   [key: string]: ComponentMapItem
 }
 
+interface BackOptions {
+  title?: string
+}
 declare type ComponentMap = IComponentMaps | null
 declare type RouterRecords = Array<string>
 declare type VueComponentRef = Record<string, any> | null
@@ -100,7 +103,7 @@ export function useMiniRouter() {
     })
   }
   /* 返回并渲染上一个组件 */
-  const back = (params?: any) => {
+  const back = (params?: any, options?: BackOptions) => {
     /* 校验 */
     if (routerRecords.length === 0) {
       console.warn("miniRouter", "路由历史记录为空，不能执行返回操作")
@@ -115,9 +118,10 @@ export function useMiniRouter() {
     /* 到何处去 */
     to = routerRecords.slice(-1)[0]
     /* 调用挂载替换点的更新方法 */
+    const title = (options || {}).title
     routerView.update({
       component: componentMap[to].component,
-      title: componentMap[to].title,
+      title: title || componentMap[to].title,
       name: to
     })
     if (callback) {
@@ -157,6 +161,11 @@ export function useMiniRouter() {
     isEntry = true
     callback = null
   }
+  const updateRouteInfo = (name: string, key: string, value: any) => {
+    if(componentMap && componentMap[name]){
+      (componentMap[name] as any)[key] = value
+    }
+  }
   return {
     has,
     next,
@@ -164,6 +173,7 @@ export function useMiniRouter() {
     find,
     registerReplacePoint,
     setComponentMap,
-    getRouterRecords
+    getRouterRecords,
+    updateRouteInfo
   }
 }
